@@ -11,7 +11,7 @@ public class EditItemActivity extends AppCompatActivity {
 
     EditText etModify;
     int placement;
-    String myItem;
+    String myItem = null;
 
 
     @Override
@@ -19,15 +19,10 @@ public class EditItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_item);
         etModify = (EditText) findViewById(R.id.etEditText);
-        placement = getIntent().getIntExtra("position", 0);
-        Bundle extras = getIntent().getExtras();
-        if(extras != null){
-            myItem = extras.getString("item");
-            placement = extras.getInt("position");
-            etModify.setText(myItem);
-        }
-
+        myItem = getIntent().getStringExtra("MainActivity.item");
+        etModify.setText(myItem);
     }
+
 
     public void onSaveItem(View view) {
         Intent data = new Intent();

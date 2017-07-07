@@ -1,13 +1,16 @@
 package com.example.emmanuelroodly.emmanueltodo;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.apache.commons.io.FileUtils;
 
@@ -44,18 +47,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-
+            @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                String bagayLan = todoItems.get(position);
-                Intent i = new Intent(MainActivity.this, EditItemActivity.class);
+
+                String bagayLan = todoItems.get(position).toString();
+                Intent i = new Intent(MainActivity.this, change.class);
+                final int to_give = position;
                 i.putExtra("item", bagayLan);
-                i.putExtra("position", position);
+                i.putExtra("pos", to_give);
                 startActivityForResult(i, REQUEST_CODE);
                 //startActivity(i);
             }
         });
     }
+
 
 
 
@@ -109,17 +115,14 @@ public class MainActivity extends AppCompatActivity {
     {
         if(resultCode == RESULT_OK && requestCode == REQUEST_CODE)
         {
-            Bundle donnee = getIntent().getExtras();
-            if(donnee != null) {
-                int place = donnee.getInt("position");
-                String changement = donnee.getString("modification");
-                todoItems.set(place, changement);
-                writeItems();
-            }
+            //Bundle donnee = getIntent().getExtras();
+            final int place = data.getExtras().getInt("pip", 0);
+            String changement = data.getExtras().getString("element").toString();
+            todoItems.set(place, changement);
+            writeItems();
+
         }
     }
 
-    public void onSaveItem(View view) {
 
-    }
 }

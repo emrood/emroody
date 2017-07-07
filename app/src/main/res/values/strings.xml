@@ -4,4 +4,8 @@
     <string name="add_item">Add a new item...</string>
     <string name="etModify">Redifine</string>
     <string name="Save">Save</string>
+    <string name="SaveItem">bt_save</string>
+    <string name="bt_save">Save</string>
+    <string name="edit_item">Edit an item</string>
+    <string name="label">Change the value</string>
 </resources>
